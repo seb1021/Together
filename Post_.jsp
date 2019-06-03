@@ -3,7 +3,6 @@
     <%@page import="java.sql.*" %>
     <%@page import="java.io.*" %>
     
-    
     <%
     	Connection conn= null;
     	PreparedStatement pstmt= null;
@@ -12,15 +11,17 @@
     	//form에서 데이터베이스에 저장할 값 받아오기
     	String Contents = request.getParameter("contents");
     	String Images = request.getParameter("images");
-    	
+    	out.print(Contents);
+    	out.print(Images);
     	try{
     		Class.forName("com.mysql.jdbc.Driver");
     		
     		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sns","root","1220");
     		//게시글을 DB에 저장하는 부분
-    		pstmt = conn.prepareStatement("INSERT INTO post VALUES(?,?)");
+    		pstmt = conn.prepareStatement("INSERT INTO post(Contents,image_path) VALUES(?,?)");
     		pstmt.setString(1,Contents);
     		pstmt.setString(2,Images);
+    		pstmt.executeUpdate();
     	}
     	catch(Exception e){
     		e.printStackTrace();
