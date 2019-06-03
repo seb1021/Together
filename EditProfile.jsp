@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.io.*" %>
-<%@page import="java.sql.*" %> 
+<%@page import="java.sql.*" %>
+<%@page import="java.util.*" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +18,9 @@
 <title>EditProfile.jsp</title>
 </head>
 <body>
+<%!
+	ResultSet rs = null;
+%>
 <%
 		String url = "jdbc:mysql://127.0.0.1:3306/sns";
 		String uid = "root";
@@ -29,6 +33,7 @@
 		String website = null;
 		String introduction = null;
 		String picture= null;
+		
 		
 		Connection connect = null;
 		PreparedStatement pstmt = null;
@@ -43,24 +48,19 @@
 
 				String query2 = "SELECT * from users";		
 				 pstmt = connect.prepareStatement(query2);
-				 ResultSet rs = pstmt.executeQuery();
+				  rs = pstmt.executeQuery();
 				 
 				 while(rs.next()){
 					 email = rs.getString("email");
+					 
 					 if(email.equals(session.getAttribute("username")))
 							break;
+					
 				 }
-					nickname=rs.getString("nickname");
-					gender=rs.getString("gender");
-					birth=rs.getString("birth");
-					website=rs.getString("website");
-					introduction=rs.getString("introduction");
 				
-
 				} 
 
-				pstmt.close();
-				connect.close();
+			
 				
 			
 		}catch(Exception e){
@@ -72,16 +72,10 @@
 		
 		
 	%>
-	<script>
-		document.getElementById("nickname").value = <%=nickname%>;	
-		document.getElementById("gender").value = <%=gender%>;
-		document.getElementById("birth").value = <%=birth%>;
-		document.getElementById("website").value = <%=website%>;
-		document.getElementById("comment").value = <%=introduction%>;
-	</script>
+	
 <div align = "center" style="margin-bottom: 30px">
 	<h1>Edit Your ProFile !</h1>
-	
+	 
 </div>
 <div class="container">
   <div class="card"></div>
@@ -119,13 +113,13 @@
                                 <div class="tab-content ml-1" id="myTabContent">
                                     <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
                                         
-										<form action="EditProfile.jsp" method="post">
+										<form action="EditProfileDAO.jsp" method="post">
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">닉네임</label>
                                             </div>
                                                  <div class="form-group"> 
-												  <input type="text" class="form-control" id="nickname" name="nickname">
+												  <input type="text" class="form-control" id="nickname" name="nickname" value="<%=rs.getString("nickname")%>">
 												</div>
                                   
                                         </div>
@@ -147,7 +141,7 @@
                                                 <label style="font-weight:bold;">생일</label>
                                             </div>
                                              <div class="form-group"> 
-												  <input type="date" class="form-control" id="birth" name="birth">
+												  <input type="date" class="form-control" id="birth" name="birth" value="<%=rs.getString("birth")%>">
 												</div>
                                         </div>
                                         <hr />
@@ -156,7 +150,7 @@
                                                 <label style="font-weight:bold;">개인 웹사이트</label>
                                             </div>
                                              <div class="form-group"> 
-												  <input type="text" class="form-control" id="website" name="website">
+												  <input type="text" class="form-control" id="website" name="website" value="<%=rs.getString("website")%>">
 												</div>
                                         </div>
                                         <hr />
@@ -165,7 +159,7 @@
                                                 <label style="font-weight:bold;">소개</label>
                                             </div>
                                            <div class="form-group">
-											  <textarea class="form-control" rows="5" cols="50" id="comment" name="comment"></textarea>
+											  <input type="text" class="form-control" id="comment" name="comment" value="<%=rs.getString("introduction")%>">
 											</div>
                                         </div>
                                         <hr />
@@ -188,59 +182,5 @@
             </div>
   
 
-<%
-		
-		 driver = "com.mysql.jdbc.Driver";
-		 nickname = request.getParameter("nickname");
-		 gender = request.getParameter("gender");
-		 birth = request.getParameter("birth");
-		 website = request.getParameter("website");
-		 introduction = request.getParameter("introduction");
-		 picture = request.getParameter("picture");
-		
-		 connect = null;
-		 pstmt = null;
-		out.println(session.getAttribute("username")+"님이 로그인하셨습니다.");
-		out.println(nickname);
-		out.println(gender);
-		out.println(birth);
-		out.println(website);
-		out.println(introduction);
-		try{
-			
-			Class.forName(driver);
-			connect = DriverManager.getConnection(url, "root", "5245");
-			
-			if(connect != null){
-
-				String query2 = "UPDATE users set nickname=?, gender=?, birth=?, website=?, introduction=? where email=?";		
-				 pstmt = connect.prepareStatement(query2);
-
-				 pstmt.setString(1, nickname);
-				
-				 pstmt.setString(2, gender);
-				 pstmt.setString(3, birth);
-				 pstmt.setString(4, website);
-				 pstmt.setString(5, introduction);
-				 pstmt.setString(6,(String)session.getAttribute("username"));
-				 pstmt.executeUpdate();
-				
-				 out.println("<script>alert('저장되었습니다.')</script>");
-				 out.println("<script>window.location=ShowProfile.jsp'</script>");
-				} 
-
-				pstmt.close();
-				connect.close();
-				
-			
-		}catch(Exception e){
-			
-			out.println(e.getMessage()); 
-			e.printStackTrace();
-		}	
-		
-		
-		
-	%>
 </body>
 </html>
