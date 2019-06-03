@@ -1,0 +1,78 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="login.css" rel="stylesheet">
+<script src="login.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+<body style="background-color: #ffffff">
+<div class="container" >
+	<div class="row">
+		
+<!-- Mixins-->
+<!-- Pen Title-->
+<div class="pen-title">
+  <h1>Material Login Form</h1>
+</div>
+<div class="container">
+  <div class="card"></div>
+  <div class="card">
+    <h1 class="title">Login</h1>
+    <form action="login.jsp" method="POST">
+      <div class="input-container">
+        <input type="text" name="email" required="required"/>
+        <label for="Username">email</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" name="password" required="required"/>
+        <label for="Password">Password</label>
+        <div class="bar"></div>
+      </div>
+       <div class="button-container">
+       <button type="submit"><span>Next</span></button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="card alt">
+    <div class="toggle"></div>
+    <h1 class="title">Register
+      <div class="close"></div>
+    </h1>
+    <form action="signup.jsp" method="POST">
+      <div class="input-container">
+        <input type="email" name="Email" required="required"/>
+        <label for="Email">Email</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="text" name="Tel" required="required"/>
+        <label for="Tel">Tel</label>
+        <div class="bar"></div>
+      </div>
+       <div class="input-container">
+        <input type="text" name="Name" required="required"/>
+        <label for="Name">Name</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" name="Password" required="required"/>
+        <label for="Password">Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" name="Repeat Password" required="required"/>
+        <label for="Repeat Password">Repeat Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+        <button type="submit"><span>Next</span></button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Portfolio--><a id="portfolio" href="http://pkshopy.com/farooqshad/" title="View my portfolio!"><i class="fa fa-link"></i></a>
+	</div>
+</div>
+</body>
