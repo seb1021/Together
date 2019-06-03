@@ -26,10 +26,9 @@
         String title=request.getParameter("title");
 		String contents=request.getParameter("contents");
 	    //jsp에 자바코드를 사용할때  
-	    sql = "insert into schedule values ('"+day+"','"+title+"','"+contents+"')";      //자신의 친구리스트 가져옴
+	    sql = "insert into schedule values ('"+day+"','"+title+"','"+contents+"')";    
 	    try{
 	    	st.executeUpdate(sql);
-	    	st.close();
 	    }
 	    catch(SQLException e){
 	    	e.printStackTrace();
@@ -63,6 +62,20 @@
 	   		st.close();
 	   		conn.close();
 	   	}
+    }
+    else if(action.equals("del_schedule")){
+    	String date=request.getParameter("date");
+    	sql="delete from schedule where day ='"+date+"'";
+    	 try{
+ 	    	st.executeUpdate(sql);
+ 	    }
+ 	    catch(SQLException e){
+ 	    	e.printStackTrace();
+ 	    }
+ 	   	finally{
+ 	   		st.close();
+ 	   		conn.close();
+ 	   	}
     }
 %>  
 </script>

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.sql.*,java.util.* "
     pageEncoding="UTF-8"%>
     <% request.setCharacterEncoding("UTF-8"); %>
@@ -119,13 +118,23 @@ table.calendar td{
         	for(String[] term : (ArrayList<String[]>)schedule_list)
         	{
         		%>
-                $('#<%=term[0]%>').append('<p style="background-color:skyblue;" onclick=detail("<%=term[0]%>")><%=term[1]%></p>');
-                $('#detail').append('<p id="<%=term[0]%>_p" style="display:none; visibility: hidden;">제목:<%=term[1]%><br><br>내용:<%=term[2]%></p>');
+        		$('#<%=term[0]%>').append('<p style="background-color:skyblue;" id="<%=term[0]%>_s" onclick=detail("<%=term[0]%>")><%=term[1]%></p>');
+                $('#detail').append('<div id="<%=term[0]%>_p" style="display:none; visibility: hidden;"><p>제목:<%=term[1]%><br><br>내용:<%=term[2]%></p><input type="button" onclick=delete_schedule("<%=term[0]%>") value="삭제"></div>');
 
         		<%
         	}
         %>
     }
+   
+    function delete_schedule(ttarget)
+    {
+    	var d_target = ttarget;
+    	document.getElementById("date").value=d_target;
+    	$("#"+d_target+"_s").remove();
+        $("#"+d_target+"_p").remove();
+    	document.getElementById("form3").submit();
+    }
+    
     var check2 = false
     function detail(target)
     {
@@ -169,7 +178,8 @@ table.calendar td{
         var title = document.getElementById("title").value;
         var contents = document.getElementById("contents").value;
         document.getElementById("day").value=target;
-        $('#'+target).append('<p style="background-color:skyblue;">'+title+'</p>');
+        $('#'+target).append('<p style="background-color:skyblue;" id="'+target+'_s" onclick=detail("'+target+'")>'+title+'</p>');  
+        $('#detail').append('<div id="'+target+'_p" style="display:none; visibility: hidden;"><p>제목:'+title+'<br><br>내용:'+contents+'</p><input type="button" onclick=delete_schedule("'+target+'") value="삭제"></div>');
        
         check = false;
         document.getElementById("form1").submit();
@@ -230,6 +240,11 @@ table.calendar td{
 	<input type="hidden" name="action" value="load_schedule">
 	<input type="hidden" name="year" id = year value=""> 
 	<input type="hidden" id="month" name="month" value="">
+</form>
+
+<form action="sche_db.jsp" id="form3" target=if >
+	<input type="hidden" name="action" value="del_schedule">
+	<input type="hidden" name="date" id = date value=""> 
 </form>
 </body>
 </html>
