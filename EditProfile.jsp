@@ -22,6 +22,7 @@
 	ResultSet rs = null;
 %>
 <%
+		request.setCharacterEncoding("UTF-8");
 		String url = "jdbc:mysql://127.0.0.1:3306/sns";
 		String uid = "root";
 		String pwd = "5245";
@@ -83,10 +84,10 @@
     <h1 class="title" style="border-left: 5px solid #ec2652;">Profile</h1>
 <div class="container">
         <div class="row">
-           
+           	<form action="EditProfileDAO.jsp" method="post">
                             <div class="d-flex justify-content-start">
                                 <div class="image-container">
-                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                    <img src="image/<%=rs.getString("picture")%>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     <div class="middle">
                                         <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
                                         <input type="file" style="display: none;" id="profilePicture" name="file" />
@@ -113,7 +114,7 @@
                                 <div class="tab-content ml-1" id="myTabContent">
                                     <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
                                         
-										<form action="EditProfileDAO.jsp" method="post">
+										
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">닉네임</label>

@@ -48,7 +48,7 @@
 				if(foundUser){
 					
 					session.setAttribute("username", email);	//세션에 사용자의 이메일 저장
-					out.println("<script>alert('로그인 성공!(다음 메인홈페이지 연결ㄱㄱ)')</script>");
+					out.println("<script>alert('로그인 성공!)')</script>");
 					out.println(session.getAttribute("username")+"님이 로그인한 상태입니다.");
 					
 				}else {

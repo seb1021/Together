@@ -10,6 +10,7 @@
 </head>
 <body>
 <%
+			request.setCharacterEncoding("UTF-8");
 			String url = "jdbc:mysql://127.0.0.1:3306/sns";
 			String uid = "root";
 			String pwd = "5245";
@@ -19,7 +20,7 @@
 		 String birth = request.getParameter("birth");
 		 String website = request.getParameter("website");
 		 String introduction = request.getParameter("comment");
-		 String picture = request.getParameter("picture");
+		 String picture = request.getParameter("file");
 		
 		 Connection connect = null;
 			PreparedStatement pstmt = null;
@@ -29,6 +30,7 @@
 		out.println(birth);
 		out.println(website);
 		out.println(introduction);
+		out.println(picture);
 		try{
 			
 			Class.forName(driver);
@@ -36,16 +38,16 @@
 			
 			if(connect != null){
 
-				String query2 = "UPDATE users set nickname=?, gender=?, birth=?, website=?, introduction=? where email=?";		
+				 String query2 = "UPDATE users set nickname=?, gender=?, birth=?, website=?, introduction=?, picture=? where email=?";		
 				 pstmt = connect.prepareStatement(query2);
 
 				 pstmt.setString(1, nickname);
-				
 				 pstmt.setString(2, gender);
 				 pstmt.setString(3, birth);
 				 pstmt.setString(4, website);
 				 pstmt.setString(5, introduction);
-				 pstmt.setString(6,(String)session.getAttribute("username"));
+				 pstmt.setString(6, picture);
+				 pstmt.setString(7,(String)session.getAttribute("username"));
 				 pstmt.executeUpdate();
 				
 				 out.println("<script>alert('저장되었습니다.')</script>");

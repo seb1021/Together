@@ -57,7 +57,7 @@
 					<center>
 						<h1>Congratulation!</h1>
 						<h2>Your account has been registered :) </h2>
-						<span>Do you want to log in now?<a href="login.html">Click Here</a></span>
+						<span>Do you want to log in now?<a href="index.html">Click Here</a></span>
 					</center>
 
 				<%

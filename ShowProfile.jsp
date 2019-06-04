@@ -20,6 +20,9 @@
 </head>
 <body style="background-color: #ffffff;" >
 	<%
+	
+		request.setCharacterEncoding("UTF-8");
+
 		String url = "jdbc:mysql://127.0.0.1:3306/sns";
 		String uid = "root";
 		String pwd = "5245";
@@ -57,7 +60,8 @@
 					birth=rs.getString("birth");
 					website=rs.getString("website");
 					introduction=rs.getString("introduction");
-				
+					picture = rs.getString("picture");
+					
 				} 
 
 				pstmt.close();
@@ -75,7 +79,8 @@
 	%>
 	<div align = "center" style="margin-bottom: 30px">
 	<h1>Edit Your ProFile !</h1>
-	
+	<%=picture %>
+	<img src="image\<%=picture %>">
 </div>
 <div class="container">
   <div class="card"></div>
@@ -83,10 +88,10 @@
     <h1 class="title" style="border-left: 5px solid #ec2652;">Profile</h1>
 <div class="container">
         <div class="row">
-           
+          
                             <div class="d-flex justify-content-start">
                                 <div class="image-container">
-                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                    <img src="image\<%=picture%>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     <div class="middle">
                                         <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
                                         <input type="file" style="display: none;" id="profilePicture" name="file" />
