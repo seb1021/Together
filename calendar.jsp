@@ -7,6 +7,12 @@
 <head>
 <jsp:useBean id="schedule_list" scope="request" class="java.util.ArrayList" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Calendar</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
@@ -33,6 +39,22 @@ table.calendar td{
 </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar-nav" style="font-size: 1em">
+    <li class="nav-item active" >
+      <a class="nav-link" href="Post.jsp"><%=session.getAttribute("username")%>님 환영합니다. ♡</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="logout.jsp">logout</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="ShowProfile.jsp">내 프로필</a>
+    </li>
+    
+  </ul>
+</nav>
 <div style="display:inline-block; margin-left:25%; float:left">
     <div class="cal_top">
         <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>

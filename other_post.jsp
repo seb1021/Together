@@ -3,42 +3,46 @@
     <%@page import="java.sql.*" %>
     <%@page import="java.io.*" %>
     <%@page import="java.util.*" %>
-    <%@page import="javax.servlet.*" %>
     
-    <%//게시물 띄우기
+    <%
     request.setCharacterEncoding("UTF-8");
-	Connection conn= null;
-	PreparedStatement pstmt= null;
-	
-	String[] sub_list = new String[2];
-	String[] Title= new String[200];
-	String[] Contents = new String[200];
-	String[] Time = new String[200];
+   Connection conn= null;
+   PreparedStatement pstmt= null;
+   
+   String[] sub_list = new String[2];
+   String[] Title= new String[200];
+   String[] Contents = new String[200];
+   String[] Time = new String[200];
+   String[] email2 = new String[200];
 
-	int i=0;
-	try{
-		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sns","root","5245");
+   String Useremail= (String)session.getAttribute("username");
+   
+   int i=0;
+   try{
+      Class.forName("com.mysql.jdbc.Driver");
+      conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sns","root","5245");
 
-		pstmt = conn.prepareStatement("SELECT * FROM post");//테이블의 모든 데이터 가져오기
-		 
-
-		ResultSet rs = pstmt.executeQuery();
-		
-		while(rs.next())
-		{//게시글 데이터를 배열로 만들어서 저장
-			Title[i]=rs.getString("Title");
-			Contents[i]=rs.getString("Contents");
-			Time[i]=rs.getString("Time");
-			i++;
-		}
-		
-		
-	}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-    
+      pstmt = conn.prepareStatement("SELECT * FROM post WHERE NOT email='"+Useremail+"'");//테이블의 모든 데이터 가져오기
+      //pstmt = conn.prepareStatement("SELECT * FROM post");
+      ResultSet rs = pstmt.executeQuery();
+      
+      while(rs.next())
+      {//게시글 데이터를 배열로 만들어서 저장
+    	  email2[i]=rs.getString("email");
+         Title[i]=rs.getString("Title");
+         Contents[i]=rs.getString("Contents");
+         Time[i]=rs.getString("Time");
+         i++;
+      }
+      //request.setAttribute("Title",Title);
+      //request.setAttribute("Contents",Contents);
+      //request.setAttribute("Time",Time);
+      //pageContext.forward("Post.jsp?");
+      
+   }
+      catch(Exception e){
+         e.printStackTrace();
+      }
     %>
 
 <!DOCTYPE html>
@@ -76,6 +80,31 @@ body {
         }
 </style>
 <script type="text/javascript" src="//code.jquery.com/jquery-3.1.0.min.js" charset="utf-8"></script>
+<script>
+var check = false
+function with_add()
+{
+   if(!check)
+    {      
+        document.getElementById("no").style.display="none";
+        document.getElementById("no").style.visibility="none";
+        document.getElementById("yes").style.display="inline-block";
+        document.getElementById("yes").style.visibility="visible";
+        
+        check = true;
+    }
+    else
+    {
+        document.getElementById("yes").style.display="none";
+         document.getElementById("yes").style.visibility="none";
+         document.getElementById("no").style.display="inline-block";
+         document.getElementById("no").style.visibility="visible";
+       
+        check = false;
+    }
+}
+
+</script>
 </head>
 
 <body>
@@ -190,10 +219,10 @@ crossorigin="anonymous">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="image\<%=rs.getString("picture")%>" alt="">
+                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                                 </div>
                                 <div class="ml-2">
-                                    <div class="h5 m-0" id="Name"><%=session.getAttribute("username") %></div>
+                                    <div class="h5 m-0" id="Name"><%=email2[m]%></div>
                                     <div class="h7 text-muted">Miracles Lee Cross</div>
                                 </div>
                             </div>
@@ -223,7 +252,13 @@ crossorigin="anonymous">
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Width</a>
+                      <div id="no" style="display:inline-block; visibility:visible;" onclick="with_add()">
+						<img src="image\heart1.png" width="20px" height="20px">
+						</div>
+						<div id="yes" style="display:none; visibility:none;" onclick="with_add()">
+						<img src="image\heart2.png" width="20px" height="20px"> 
+						</div>
+
                         
                     </div>
                 </div>

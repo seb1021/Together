@@ -74,9 +74,60 @@ crossorigin="anonymous">
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        
+      
+      
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <%
+  
+  request.setCharacterEncoding("UTF-8");
+
+	String url = "jdbc:mysql://127.0.0.1:3306/sns";
+	String uid = "root";
+	String pwd = "5245";
+	String driver = "com.mysql.jdbc.Driver";
+	String email;
+	String nickname =null;
+	
+	Connection connect = null;
+	PreparedStatement pstmt = null;
+	
+	Class.forName(driver);
+	connect = DriverManager.getConnection(url, "root", "5245");
+	
+	String query2 = "SELECT * from users";		
+	 pstmt = connect.prepareStatement(query2);
+	 ResultSet rs = pstmt.executeQuery();
+	 
+	 while(rs.next()){
+		 email = rs.getString("email");
+		 if(email.equals(session.getAttribute("username")))
+				break;
+	 }
+  %>
+    
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar-nav" style="font-size: 1em">
+    <li class="nav-item active" >
+      <a class="nav-link" href="#"><%=session.getAttribute("username")%>님 환영합니다. ♡</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="logout.jsp">logout</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="ShowProfile.jsp">내 프로필</a>
+    </li>
+    
+  </ul>
+</nav>        
 <nav class="navbar navbar-light bg-white">
-        <a href="Post.html" class="navbar-brand">Together♥</a>
+        <a href="Post.jsp" class="navbar-brand">Together♥</a>
         <form class="form-inline">
             <div class="input-group">
                 <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -95,7 +146,7 @@ crossorigin="anonymous">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="h5">@OhYeonJeong</div>
+                        <div class="h5">@<%=rs.getString("name") %></div>
                         <div class="h7 text-muted">Fullname : OhYeonJeong</div>
                         <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
                             etc.
@@ -103,7 +154,7 @@ crossorigin="anonymous">
                     </div>
                     <ul class="list-group list-group-flush">
                     <!-- 이 부분에 다이어리 관련 버튼 추가하면 될듯 -->
-                        <li class="list-group-item"><button class="btn btn-primary">My Diary</button></li>
+                        <li class="list-group-item"><a href="calendar.jsp"><button class="btn btn-primary">My Diary</button></a></li>
                         </ul>
                 </div>
             </div>
@@ -165,7 +216,10 @@ crossorigin="anonymous">
                 </div>				
 				</form>
 				<form id="form2" method="POST" action="post_show_db.jsp">
-					<input type="submit" value="게시글 보기">
+					<input type="submit" value="내 게시글 보기">
+				</form>
+				<form id="form2" method="POST" action="other_post.jsp">
+					<input type="submit" value="타임라인">
 				</form>
             </div>
         </div>

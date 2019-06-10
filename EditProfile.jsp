@@ -78,9 +78,9 @@
 		
 	%>
 	<nav class="navbar navbar-expand-sm bg-light navbar-light">
-  <ul class="navbar-nav" style="font-size: 1.5em">
+  <ul class="navbar-nav" style="font-size: 1em">
     <li class="nav-item active" >
-      <a class="nav-link" href="#"><%=session.getAttribute("username")%>님 환영합니다. ♡</a>
+      <a class="nav-link" href="Post.jsp"><%=session.getAttribute("username")%>님 환영합니다. ♡</a>
     </li>
     
     <li class="nav-item">

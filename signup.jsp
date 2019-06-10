@@ -10,6 +10,8 @@
 </head>
 <body>
 	<%
+	
+	request.setCharacterEncoding("UTF-8");
 		String url = "jdbc:mysql://127.0.0.1:3306/sns";
 		String uid = "root";
 		String pwd = "5245";
@@ -55,9 +57,8 @@
 					 pstmt.executeUpdate();
 				%>	
 					<center>
-						<h1>Congratulation!</h1>
-						<h2>Your account has been registered :) </h2>
-						<span>Do you want to log in now?<a href="index.html">Click Here</a></span>
+						out.println("<script>alert('회원가입 성공! 다시 로그인 해주세요♡)')</script>");
+					out.println("<script>window.location='index.html'</script>");
 					</center>
 
 				<%

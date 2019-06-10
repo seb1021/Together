@@ -10,6 +10,7 @@
 </head>
 <body>
 	<%
+	request.setCharacterEncoding("UTF-8");
 		String url = "jdbc:mysql://127.0.0.1:3306/sns";
 		String uid = "root";
 		String pwd = "5245";
@@ -49,7 +50,7 @@
 					
 					session.setAttribute("username", email);	//세션에 사용자의 이메일 저장
 					out.println("<script>alert('로그인 성공!)')</script>");
-					out.println(session.getAttribute("username")+"님이 로그인한 상태입니다.");
+					out.println("<script>window.location='Post.jsp'</script>");
 					
 				}else {
 

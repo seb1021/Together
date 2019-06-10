@@ -15,23 +15,26 @@
 	String Contents=null;
 	String Title=null;
 	
+	
 	java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd hh::mm");
 	String Time = formatter.format(new java.util.Date());
 
 	
 	Contents = request.getParameter("Contents");
     Title = request.getParameter("Title");
-	System.out.println(Contents);
+    
 	
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sns","root","1220");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sns","root","5245");
 		
 		//게시글을 DB에 저장하는 부분
-		pstmt = conn.prepareStatement("INSERT INTO post(Title,Contents,Time) VALUES(?,?,?)");
-		pstmt.setString(1,Title);
-		pstmt.setString(2,Contents);
-		pstmt.setString(3,Time);
+		pstmt = conn.prepareStatement("INSERT INTO post(email,Title,Contents,Time) VALUES(?,?,?,?)");
+		System.out.println((String)session.getAttribute("username"));
+		pstmt.setString(1,(String)session.getAttribute("username"));
+		pstmt.setString(2,Title);
+		pstmt.setString(3,Contents);
+		pstmt.setString(4,Time);
 		pstmt.executeUpdate();
 		
 		out.print("<script>alert('게시글 작성 완료!')</script>");

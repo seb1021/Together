@@ -9,11 +9,11 @@
     java.sql.Statement st = null;//정적인 쿼리문
     String sql;//쿼리문장
     String jdbc_driver = "com.mysql.jdbc.Driver";
-    String jdbc_url = "jdbc:mysql://localhost/together";
+    String jdbc_url = "jdbc:mysql://localhost/sns";
     String action = request.getParameter("action");
     try{
           Class.forName(jdbc_driver);
-          conn = DriverManager.getConnection(jdbc_url, "root", "hong1972");
+          conn = DriverManager.getConnection(jdbc_url, "root", "5245");
           st = conn.createStatement();//객체생성
          
        }
