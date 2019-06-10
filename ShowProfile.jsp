@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css"/>
 <title> | 프로필 보기 | </title>
 </head>
-<body style="background-color: #ffffff;" >
+<body style="background-color: #ffffff; padding-top : 0px;" >
 	<%
 	
 		request.setCharacterEncoding("UTF-8");
@@ -37,7 +37,7 @@
 		
 		Connection connect = null;
 		PreparedStatement pstmt = null;
-		out.println(session.getAttribute("username")+"님이 로그인하셨습니다.");
+
 		
 		try{
 			
@@ -77,10 +77,24 @@
 		
 		
 	%>
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar-nav" style="font-size: 1.5em">
+    <li class="nav-item active" >
+      <a class="nav-link" href="#"><%=session.getAttribute("username")%>님 환영합니다. ♡</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="logout.jsp">logout</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="ShowProfile.jsp">내 프로필</a>
+    </li>
+    
+  </ul>
+</nav>
 	<div align = "center" style="margin-bottom: 30px">
-	<h1>Edit Your ProFile !</h1>
-	<%=picture %>
-	<img src="image\<%=picture %>">
+	<img src="image\profilePic.JPG">
 </div>
 <div class="container">
   <div class="card"></div>

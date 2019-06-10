@@ -7,6 +7,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -17,7 +22,7 @@
 <link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css"/>
 <title>EditProfile.jsp</title>
 </head>
-<body>
+<body style="background-color: white; padding-top : 0px;">
 <%!
 	ResultSet rs = null;
 %>
@@ -38,7 +43,6 @@
 		
 		Connection connect = null;
 		PreparedStatement pstmt = null;
-		out.println(session.getAttribute("username")+"님이 로그인하셨습니다.");
 		
 		try{
 			
@@ -73,9 +77,24 @@
 		
 		
 	%>
-	
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar-nav" style="font-size: 1.5em">
+    <li class="nav-item active" >
+      <a class="nav-link" href="#"><%=session.getAttribute("username")%>님 환영합니다. ♡</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="logout.jsp">logout</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="ShowProfile.jsp">내 프로필</a>
+    </li>
+    
+  </ul>
+</nav>
 <div align = "center" style="margin-bottom: 30px">
-	<h1>Edit Your ProFile !</h1>
+	<img src="image\EditProfile.JPG">
 	 
 </div>
 <div class="container">
